@@ -12,14 +12,14 @@ import (
 func TestFormatterDefaultFormat(t *testing.T) {
 	f := Formatter{}
 
-	e := logrus.WithField("", "")
+	e := logrus.WithField("test", "test")
 	e.Message = "Test Message"
 	e.Level = logrus.WarnLevel
 	e.Time = time.Now()
 
 	b, _ := f.Format(e)
 
-	expected := strings.Join([]string{"[WARNING]:", e.Time.Format(time.RFC3339), "- Test Message"}, " ")
+	expected := strings.Join([]string{"[WARNING]:", e.Time.Format(time.RFC3339), "- Test Message test: test"}, " ")
 	if string(b) != expected {
 		t.Errorf("formatting expected result was %q instead of %q", string(b), expected)
 	}
